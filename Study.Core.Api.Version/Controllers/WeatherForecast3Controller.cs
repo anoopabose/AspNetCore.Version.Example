@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dell.Elements.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -26,12 +25,10 @@ namespace Study.Core.Api.Version.V3.Controllers
         };
 
         private readonly ILogger<WeatherForecast3Controller> _logger;
-        private readonly IGlobalization _globalization;
 
         public WeatherForecast3Controller(ILogger<WeatherForecast3Controller> logger)
         {
             _logger = logger;
-            // _globalization = globalization;
         }
 
         [HttpGet(Name = ByIdRouteName)]
@@ -48,10 +45,5 @@ namespace Study.Core.Api.Version.V3.Controllers
             .ToArray();
         }
 
-        //[HttpGet("Countries")]
-        //public Task<IList<Country>> GetCountries()
-        //{
-        //   return _globalization.GetAllCountries();
-        //}
     }
 }
