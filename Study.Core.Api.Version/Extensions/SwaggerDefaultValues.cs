@@ -7,7 +7,7 @@ using System.Linq;
 using static Microsoft.AspNetCore.Mvc.Versioning.ApiVersionMapping;
 
 
-namespace Globalization.Extensions
+namespace  Study.Core.Api.Version.Extensions
 {
 
     /// <summary>

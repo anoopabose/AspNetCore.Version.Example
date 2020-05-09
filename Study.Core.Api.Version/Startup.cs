@@ -16,7 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-namespace Globalization
+namespace  Study.Core.Api.Version
 {
     public class Startup
     {

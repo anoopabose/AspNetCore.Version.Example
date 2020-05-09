@@ -1,6 +1,6 @@
 using System;
 
-namespace Globalization
+namespace  Study.Core.Api.Version
 {
     public class WeatherForecast
     {

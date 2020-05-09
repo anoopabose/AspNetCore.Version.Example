@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Globalization.Extensions.Versions;
 
-namespace Globalization.V3.Controllers
+namespace  Study.Core.Api.Version.V3.Controllers
 {
 
     [ApiController]

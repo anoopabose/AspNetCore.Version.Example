@@ -7,7 +7,7 @@ using Globalization.Extensions.Versions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Globalization.Controllers
+namespace  Study.Core.Api.Version.Controllers
 {
     [ApiController]
     [V1]

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Globalization.Extensions
+namespace  Study.Core.Api.Version.Extensions
 {
     public static class SwaggerExtensions
     {
