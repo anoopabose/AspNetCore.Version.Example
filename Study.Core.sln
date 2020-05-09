@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Globalization", "Globalization\Globalization.csproj", "{6733D20F-A42E-473F-B3E2-C8DCFBB8C520}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Study.Core.Api.Version", "Study.Core.Api.Version\Study.Core.Api.Version.csproj", "{6733D20F-A42E-473F-B3E2-C8DCFBB8C520}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

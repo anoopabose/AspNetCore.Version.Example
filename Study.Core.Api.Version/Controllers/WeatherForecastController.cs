@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dell.Elements.Globalization;
-using Globalization.Extensions.Versions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Study.Core.Api.Version.Extensions.Versions;
 
-namespace  Study.Core.Api.Version.Controllers
+namespace Study.Core.Api.Version.Controllers
 {
     [ApiController]
+    [V2]
     [V1]
     [Route("api/[controller]")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Produces("application/json")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -21,16 +21,32 @@ namespace  Study.Core.Api.Version.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IGlobalization _globalization;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            // _globalization = globalization;
         }
 
         [HttpGet]
+        [MapToApiVersion("2016-07-01")]
         public IEnumerable<WeatherForecast> Get()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
+
+
+        }
+
+        [HttpGet]
+        [MapToApiVersion("2018-01-01")]
+        [Route("~/api/v{version:apiVersion}/[controller]", Name = "GetV2")]
+        public IEnumerable<WeatherForecast> GetV2()
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -42,10 +58,5 @@ namespace  Study.Core.Api.Version.Controllers
             .ToArray();
         }
 
-        //[HttpGet("Countries")]
-        //public Task<IList<Country>> GetCountries()
-        //{
-        //   return _globalization.GetAllCountries();
-        //}
     }
 }

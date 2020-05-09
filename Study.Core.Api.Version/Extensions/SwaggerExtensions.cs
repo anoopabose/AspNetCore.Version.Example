@@ -2,12 +2,13 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace  Study.Core.Api.Version.Extensions
+namespace Study.Core.Api.Version.Extensions
 {
     public static class SwaggerExtensions
     {
@@ -21,16 +22,16 @@ namespace  Study.Core.Api.Version.Extensions
 
             services.AddVersionedApiExplorer(options =>
             {
-                // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
-                // note: the specified format code will format the version as "'v'major[.minor][-status]"
-                // options.GroupNameFormat = "'v'VVV";
+          // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+          // note: the specified format code will format the version as "'v'major[.minor][-status]"
+          // options.GroupNameFormat = "'v'VVV";
 
-                options.GroupNameFormat = "'v'GG";
+          options.GroupNameFormat = "'v'GG";
 
-                // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
-                // can also be used to control the format of the API version in route templates
-                options.SubstituteApiVersionInUrl = true;
-                options.SubstitutionFormat = "'v'G";
+          // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+          // can also be used to control the format of the API version in route templates
+          options.SubstituteApiVersionInUrl = true;
+                options.SubstitutionFormat = "GG";
             });
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
@@ -38,11 +39,11 @@ namespace  Study.Core.Api.Version.Extensions
             services.AddSwaggerGen(
                 options =>
                 {
-                    // add a custom operation filter which sets default values
-                    options.OperationFilter<SwaggerDefaultValues>();
+              // add a custom operation filter which sets default values
+              options.OperationFilter<SwaggerDefaultValues>();
 
-                    // integrate xml comments
-                    options.IncludeXmlComments(XmlCommentsFilePath);
+              // integrate xml comments
+              options.IncludeXmlComments(XmlCommentsFilePath);
                 });
 
         }
@@ -53,12 +54,17 @@ namespace  Study.Core.Api.Version.Extensions
             app.UseSwaggerUI(
                 options =>
                 {
-                    // build a swagger endpoint for each discovered API version
-                    foreach (var description in provider.ApiVersionDescriptions)
+              // build a swagger endpoint for each discovered API version
+              foreach (var description in provider.ApiVersionDescriptions)
                     {
-                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", "WeatherForecast-" + description.GroupName.ToUpperInvariant());
+                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
                 });
+
+            // Set Swagger UI as the service's home page
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
         }
 
         static string XmlCommentsFilePath

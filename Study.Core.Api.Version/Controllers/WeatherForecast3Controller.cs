@@ -6,16 +6,16 @@ using Dell.Elements.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Globalization.Extensions.Versions;
+using Study.Core.Api.Version.Extensions.Versions;
 
-namespace  Study.Core.Api.Version.V3.Controllers
+namespace Study.Core.Api.Version.V3.Controllers
 {
 
     [ApiController]
     // [ApiVersion("3.0")]
-    [V2]
+    [V3]
     [Produces("application/json")]
-    [Route("api/{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/WeatherForecast")]
     public class WeatherForecast3Controller : ControllerBase
     {
         const string ByIdRouteName = "Get" + nameof(V3);
